@@ -1,3 +1,4 @@
+```markdown
 # Deep Learning Project 3: Adversarial Attacks on Image Classifiers
 
 This repository contains implementation of various adversarial attack methods against production-grade image classification models. We investigate how subtle perturbations can significantly degrade the performance of deep neural networks, and evaluate the transferability of these attacks across different model architectures.
@@ -17,6 +18,7 @@ We evaluate these attacks on both the full ImageNet classification space and a r
 
 - `deep_learning_project3.ipynb`: Main Jupyter notebook containing all code and experiments
 - `README.md`: This file
+
 ## Requirements
 
 The code has been tested with the following dependencies:
@@ -65,6 +67,52 @@ mean_norms = np.array([0.485, 0.456, 0.406])
 std_norms = np.array([0.229, 0.224, 0.225])
 ```
 
+## Attack Visualizations
+
+### FGSM Attack (ε=0.02)
+![FGSM Attack Visualization](/images/fgsm.png)
+
+The Fast Gradient Sign Method creates adversarial examples by taking a single step in the direction of the gradient of the loss with respect to the input image. Despite being a one-step method, FGSM creates effective perturbations that remain visually imperceptible to humans while causing significant accuracy drops.
+
+Key characteristics:
+- Single-step attack with fast execution (3.60 seconds for 500 images)
+- Reduced ResNet-34 top-1 accuracy from 70.4% to 20.2%
+- Perturbations are uniform across the entire image but subtle
+- Most successful against similar architectures (ResNet50)
+
+### I-FGSM Attack (10 iterations, ε=0.02)
+![I-FGSM Attack Visualization](/images/ifgsm.png)
+
+Iterative FGSM applies multiple small steps in the direction of the gradient, recalculating the gradient after each step. This creates more precisely targeted perturbations that completely collapse model performance while remaining visually subtle.
+
+Key characteristics:
+- Multi-step attack (24.10 seconds for 500 images)
+- Devastating effectiveness: reduced top-1 accuracy to 0.0%
+- Perturbations are more structure-aware than FGSM
+- Shows moderate transferability across different architectures
+
+### PGD Attack (20 steps, ε=0.02)
+![PGD Attack Visualization](/images/pgd.png)
+
+Projected Gradient Descent starts with random initialization and performs constrained optimization with multiple steps. PGD is considered one of the strongest white-box attacks and demonstrates how even within tight perturbation constraints, iterative methods can completely break model performance.
+
+Key characteristics:
+- Most computationally intensive (49.13 seconds for 500 images)
+- Reduced top-1 accuracy to 0.0% and top-5 to 0.4%
+- Random initialization helps find more optimal adversarial examples
+- Shows highest transferability to architecturally similar models
+
+### Patch Attack (32×32 patch, ε=0.8)
+![Patch Attack Visualization](/images/patch_attack.png)
+
+Unlike full-image perturbations, the patch attack modifies only a small 32×32 region at the center of the image. Despite the localized nature and higher epsilon value, the patch attack is less effective but more stealthy and potentially more practical for real-world applications.
+
+Key characteristics:
+- Most time-consuming to generate (143.35 seconds)
+- Moderate impact: reduced top-1 accuracy from 70.4% to 62.4%
+- Highly visible but localized changes
+- Lowest transferability across architectures
+
 ## Key Results
 
 ### Full ImageNet Evaluation
@@ -88,6 +136,18 @@ We tested our adversarial examples against DenseNet121, ResNet50, and MobileNetV
 - Full-image attacks transferred better than patch attacks
 - Architectural similarity correlated with higher transferability rates
 
+## Comparison Visualizations
+
+### Accuracy Drop Comparison
+![Accuracy Drop Comparison](/images/accuracy_drop.png)
+
+This visualization compares the top-1 accuracy drop (%) across different models and attack types. The chart highlights how transformer-based architectures like ViT-B/16 remain significantly more robust against gradient-based attacks compared to traditional CNN architectures.
+
+### Transferability Heatmap
+![Transferability Heatmap](/images/transferability_heatmap.png)
+
+The transferability heatmap visualizes how effectively adversarial examples generated for ResNet-34 transfer to other model architectures. Darker colors indicate higher transferability rates, showing clear architectural patterns in vulnerability.
+
 ## Usage
 
 1. Open the notebook in Google Colab
@@ -110,3 +170,4 @@ fgsm_images = create_adversarial_examples_fgsm(model, images, labels, epsilon)
 - Goodfellow, I. J., Shlens, J., & Szegedy, C. (2014). Explaining and harnessing adversarial examples. arXiv preprint arXiv:1412.6572.
 - Madry, A., Makelov, A., Schmidt, L., Tsipras, D., & Vladu, A. (2017). Towards deep learning models resistant to adversarial attacks. arXiv preprint arXiv:1706.06083.
 - Brown, T. B., Mané, D., Roy, A., Abadi, M., & Gilmer, J. (2017). Adversarial patch. arXiv preprint arXiv:1712.09665.
+```
