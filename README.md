@@ -1,4 +1,3 @@
-```markdown
 # Deep Learning Project 3: Adversarial Attacks on Image Classifiers
 
 This repository contains implementation of various adversarial attack methods against production-grade image classification models. We investigate how subtle perturbations can significantly degrade the performance of deep neural networks, and evaluate the transferability of these attacks across different model architectures.
@@ -70,7 +69,7 @@ std_norms = np.array([0.229, 0.224, 0.225])
 ## Attack Visualizations
 
 ### FGSM Attack (ε=0.02)
-![FGSM Attack Visualization](/images/fgsm.png)
+![FGSM Attack Visualization](/fgsm.png)
 
 The Fast Gradient Sign Method creates adversarial examples by taking a single step in the direction of the gradient of the loss with respect to the input image. Despite being a one-step method, FGSM creates effective perturbations that remain visually imperceptible to humans while causing significant accuracy drops.
 
@@ -81,7 +80,7 @@ Key characteristics:
 - Most successful against similar architectures (ResNet50)
 
 ### I-FGSM Attack (10 iterations, ε=0.02)
-![I-FGSM Attack Visualization](/images/ifgsm.png)
+![I-FGSM Attack Visualization](/IFGSM.png)
 
 Iterative FGSM applies multiple small steps in the direction of the gradient, recalculating the gradient after each step. This creates more precisely targeted perturbations that completely collapse model performance while remaining visually subtle.
 
@@ -92,7 +91,7 @@ Key characteristics:
 - Shows moderate transferability across different architectures
 
 ### PGD Attack (20 steps, ε=0.02)
-![PGD Attack Visualization](/images/pgd.png)
+![PGD Attack Visualization](/pgd.png)
 
 Projected Gradient Descent starts with random initialization and performs constrained optimization with multiple steps. PGD is considered one of the strongest white-box attacks and demonstrates how even within tight perturbation constraints, iterative methods can completely break model performance.
 
@@ -103,7 +102,7 @@ Key characteristics:
 - Shows highest transferability to architecturally similar models
 
 ### Patch Attack (32×32 patch, ε=0.8)
-![Patch Attack Visualization](/images/patch_attack.png)
+![Patch Attack Visualization](/patch_attack.png)
 
 Unlike full-image perturbations, the patch attack modifies only a small 32×32 region at the center of the image. Despite the localized nature and higher epsilon value, the patch attack is less effective but more stealthy and potentially more practical for real-world applications.
 
