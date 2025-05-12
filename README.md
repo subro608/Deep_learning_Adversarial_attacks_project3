@@ -17,8 +17,6 @@ We evaluate these attacks on both the full ImageNet classification space and a r
 
 - `deep_learning_project3.ipynb`: Main Jupyter notebook containing all code and experiments
 - `README.md`: This file
-- `/results`: Visualizations and examples of adversarial images
-
 ## Requirements
 
 The code has been tested with the following dependencies:
