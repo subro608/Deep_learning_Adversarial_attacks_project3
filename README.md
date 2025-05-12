@@ -138,12 +138,12 @@ We tested our adversarial examples against DenseNet121, ResNet50, and MobileNetV
 ## Comparison Visualizations
 
 ### Accuracy Drop Comparison
-![Accuracy Drop Comparison](/images/accuracy_drop.png)
+![Accuracy Drop Comparison](/accuracy_drop.png)
 
 This visualization compares the top-1 accuracy drop (%) across different models and attack types. The chart highlights how transformer-based architectures like ViT-B/16 remain significantly more robust against gradient-based attacks compared to traditional CNN architectures.
 
 ### Transferability Heatmap
-![Transferability Heatmap](/images/transferability_heatmap.png)
+![Transferability Heatmap](/transfer_heat.png)
 
 The transferability heatmap visualizes how effectively adversarial examples generated for ResNet-34 transfer to other model architectures. Darker colors indicate higher transferability rates, showing clear architectural patterns in vulnerability.
 
