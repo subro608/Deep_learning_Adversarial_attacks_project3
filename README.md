@@ -1,5 +1,3 @@
-I'll update the README to include instructions for the data setup with Google Drive and Colab. Here's the revised version:
-
 # Deep Learning Project 3: Adversarial Attacks on Image Classifiers
 
 This repository contains implementation of various adversarial attack methods against production-grade image classification models. We investigate how subtle perturbations can significantly degrade the performance of deep neural networks, and evaluate the transferability of these attacks across different model architectures.
